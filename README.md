@@ -5,7 +5,7 @@ A Model Context Protocol (MCP) server for processing lizard X-ray images and gen
 
 ## Using the MCP Server from NuGet.org
 
-To use the LizardMorph MCP server from NuGet.org, you must have the [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) (preview 6 or higher) installed.
+To use the LizardMorph MCP server from NuGet.org, you must have the [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) installed.
 
 Once the MCP server package is published to NuGet.org, you can configure it in your preferred IDE. Both VS Code and Visual Studio use the `dnx` command to download and install the MCP server package from NuGet.org.
 
@@ -52,4 +52,4 @@ To use the LizardMorph MCP server with Claude Desktop, add the following to your
 }
 ```
 
-Make sure you have the [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) (preview 6 or higher) installed on your system.
+Make sure you have the [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) installed on your system.
