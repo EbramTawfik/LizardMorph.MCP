@@ -6,14 +6,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LizardMorph.MCP", "LizardMo
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Release|x64 = Release|x64
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FF2E8B67-D629-89C0-4E94-76CE078B16DA}.Debug|x64.ActiveCfg = Debug|x64
-		{FF2E8B67-D629-89C0-4E94-76CE078B16DA}.Debug|x64.Build.0 = Debug|x64
-		{FF2E8B67-D629-89C0-4E94-76CE078B16DA}.Release|x64.ActiveCfg = Release|x64
-		{FF2E8B67-D629-89C0-4E94-76CE078B16DA}.Release|x64.Build.0 = Release|x64
+		{FF2E8B67-D629-89C0-4E94-76CE078B16DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF2E8B67-D629-89C0-4E94-76CE078B16DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF2E8B67-D629-89C0-4E94-76CE078B16DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF2E8B67-D629-89C0-4E94-76CE078B16DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
