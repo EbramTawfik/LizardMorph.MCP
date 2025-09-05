@@ -20,10 +20,14 @@ namespace LizardMorph.MCP.ImageProcessing
         {
             try
             {
+                Console.WriteLine($"Loading dlib model from {modelPath}...");
                 if (File.Exists(modelPath))
                 {
+                    Console.WriteLine($"Model file {modelPath} found. Initializing...");
                     _shapePredictor = ShapePredictor.Deserialize(modelPath);
+                    Console.WriteLine($"{nameof(_shapePredictor)} Deserialize from {modelPath} successful.");
                     _faceDetector = Dlib.GetFrontalFaceDetector();
+                    Console.WriteLine($"{nameof(_faceDetector)} initialized successfully.");
                     _isModelLoaded = true;
                 }
                 else
@@ -34,6 +38,15 @@ namespace LizardMorph.MCP.ImageProcessing
             catch (Exception ex)
             {
                 Console.WriteLine($"Failed to load dlib model: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner exception: {ex.InnerException.Message}");
+                    Console.WriteLine($"Inner exception type: {ex.InnerException.GetType().FullName}");
+                    Console.WriteLine($"Stack trace: {ex.InnerException.StackTrace}");
+                }
+                Console.WriteLine($"Current directory: {Environment.CurrentDirectory}");
+                Console.WriteLine($"OS: {RuntimeInformation.OSDescription}");
+                Console.WriteLine($"Architecture: {RuntimeInformation.OSArchitecture}");
                 _isModelLoaded = false;
             }
         }
