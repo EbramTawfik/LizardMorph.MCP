@@ -121,7 +121,7 @@ For both VS Code and Visual Studio, the configuration file uses the following se
 			"args": [
 				"LizardMorph.MCP",
 				"--version",
-				"0.3.0",
+				"0.4.0",
 				"--yes"
 			]
 		}
@@ -142,7 +142,7 @@ To use the LizardMorph MCP server with Claude Desktop, add the following to your
 			"args": [
 				"LizardMorph.MCP",
 				"--version",
-				"0.3.0",
+				"0.4.0",
 				"--yes"
 			]
 		}
