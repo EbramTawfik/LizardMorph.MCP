@@ -3,6 +3,8 @@
 
 A Model Context Protocol (MCP) server for processing lizard X-ray images and generating TPS (Thin Plate Spline) files for morphological analysis. This server uses the MCP C# SDK and provides automated landmark detection for lizard morphometric studies.
 
+> 🌐 **Web Version Available**: For a UI web interface, check out the [LizardMorph Web Application](https://github.com/Human-Augment-Analytics/LizardMorph) 
+
 ## Prerequisites
 
 ### Required Dependencies
