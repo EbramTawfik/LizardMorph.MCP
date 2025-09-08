@@ -56,12 +56,17 @@ namespace LizardMorph.MCP.Tools
                 var results = new List<string>();
                 var processedCount = 0;
                 var failedCount = 0;
+                var processingTimes = new List<TimeSpan>();
+
+                // Start overall timing
+                var overallStopwatch = System.Diagnostics.Stopwatch.StartNew();
 
                 // Initialize the landmark predictor
                 using var predictor = new LandmarkPredictor(predictorFile);
 
                 foreach (var imagePath in imageFiles)
                 {
+                    var imageStopwatch = System.Diagnostics.Stopwatch.StartNew();
                     try
                     {
                         var fileName = Path.GetFileNameWithoutExtension(imagePath);
@@ -73,15 +78,26 @@ namespace LizardMorph.MCP.Tools
                         // Copy the original image as-is and process landmarks
                         await ProcessSingleImageAsync(imagePath, copiedImagePath, xmlOutputPath, tpsOutputPath, predictor);
 
+                        imageStopwatch.Stop();
+                        processingTimes.Add(imageStopwatch.Elapsed);
                         processedCount++;
-                        results.Add($"✓ Processed: {Path.GetFileName(imagePath)} -> {Path.GetFileName(tpsOutputPath)}");
+                        results.Add($"✓ Processed: {Path.GetFileName(imagePath)} -> {Path.GetFileName(tpsOutputPath)} ({imageStopwatch.Elapsed.TotalSeconds:F2}s)");
                     }
                     catch (Exception ex)
                     {
+                        imageStopwatch.Stop();
                         failedCount++;
-                        results.Add($"✗ Failed: {Path.GetFileName(imagePath)} - {ex.Message}");
+                        results.Add($"✗ Failed: {Path.GetFileName(imagePath)} - {ex.Message} ({imageStopwatch.Elapsed.TotalSeconds:F2}s)");
                     }
                 }
+
+                overallStopwatch.Stop();
+
+                // Calculate timing analytics
+                var totalTime = overallStopwatch.Elapsed;
+                var averageTime = processingTimes.Count > 0 ? TimeSpan.FromMilliseconds(processingTimes.Average(t => t.TotalMilliseconds)) : TimeSpan.Zero;
+                var fastestTime = processingTimes.Count > 0 ? processingTimes.Min() : TimeSpan.Zero;
+                var slowestTime = processingTimes.Count > 0 ? processingTimes.Max() : TimeSpan.Zero;
 
                 var summary = new StringBuilder();
                 summary.AppendLine($"Batch processing completed:");
@@ -89,6 +105,16 @@ namespace LizardMorph.MCP.Tools
                 summary.AppendLine($"- Successfully processed: {processedCount}");
                 summary.AppendLine($"- Failed: {failedCount}");
                 summary.AppendLine($"- Output directory: {outputDirectory}");
+                summary.AppendLine();
+                summary.AppendLine("⏱️ Timing Analytics:");
+                summary.AppendLine($"- Total processing time: {totalTime.TotalSeconds:F2}s");
+                if (processedCount > 0)
+                {
+                    summary.AppendLine($"- Average time per image: {averageTime.TotalSeconds:F2}s");
+                    summary.AppendLine($"- Fastest processing time: {fastestTime.TotalSeconds:F2}s");
+                    summary.AppendLine($"- Slowest processing time: {slowestTime.TotalSeconds:F2}s");
+                    summary.AppendLine($"- Processing rate: {processedCount / totalTime.TotalSeconds:F2} images/second");
+                }
                 summary.AppendLine();
                 summary.AppendLine("Results:");
                 foreach (var result in results)
@@ -111,6 +137,7 @@ namespace LizardMorph.MCP.Tools
             [Description("Full path to the predictor .dat file (optional, defaults to ./better_predictor_auto.dat)")] string? predictorFile = null,
             [Description("Full path to the output directory (optional, defaults to ./output)")] string? outputDirectory = null)
         {
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             try
             {
                 // Validate input
@@ -142,14 +169,19 @@ namespace LizardMorph.MCP.Tools
                 using var predictor = new LandmarkPredictor(predictorFile);
                 await ProcessSingleImageAsync(imagePath, copiedImagePath, xmlOutputPath, tpsOutputPath, predictor);
 
+                stopwatch.Stop();
+
                 return $"✓ Successfully processed: {Path.GetFileName(imagePath)}\n" +
                        $"  Original image copied to: {copiedImagePath}\n" +
                        $"  XML output: {xmlOutputPath}\n" +
-                       $"  TPS output: {tpsOutputPath}";
+                       $"  TPS output: {tpsOutputPath}\n" +
+                       $"  ⏱️ Processing time: {stopwatch.Elapsed.TotalSeconds:F2} seconds";
             }
             catch (Exception ex)
             {
-                return $"Error processing image: {ex.Message}";
+                stopwatch.Stop();
+                return $"Error processing image: {ex.Message}\n" +
+                       $"⏱️ Time before error: {stopwatch.Elapsed.TotalSeconds:F2} seconds";
             }
         }
 
