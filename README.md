@@ -77,6 +77,15 @@ The server generates the following types of output files:
 - **TPS files**: Thin Plate Spline format files compatible with morphometric analysis software
 - **Landmark visualization images**: JPEG images showing detected landmarks as colored circles (when using landmark visualization tools)
 
+### 📝 Viewing TPS Files
+To easily view and review the generated TPS files, you can use the [**TPS Editor VS Code Extension**](https://marketplace.visualstudio.com/items?itemName=EbramTawfik.tps-editor). This extension provides:
+- Syntax highlighting for TPS files
+- Easy navigation between landmarks
+- Visual preview of coordinate data
+- Validation and error checking
+
+Install it directly from the VS Code Marketplace or via command: `code --install-extension EbramTawfik.tps-editor`
+
 ## Usage Examples
 
 1. **Check if the server is ready**:
