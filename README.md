@@ -14,6 +14,12 @@ A Model Context Protocol (MCP) server for processing lizard X-ray images and gen
   
   Place the downloaded `better_predictor_auto.dat` file in the root directory of your project.
 
+#### macOS-specific Dependencies
+If you're running on macOS, you might need to install giflib:
+```bash
+brew install giflib
+```
+
 ## Available Tools
 
 The LizardMorph MCP server provides the following tools for lizard X-ray image analysis:
