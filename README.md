@@ -1,3 +1,4 @@
+[![Deploy to NuGet](https://github.com/EbramTawfik/LizardMorph.MCP/actions/workflows/nuget.yml/badge.svg)](https://github.com/EbramTawfik/LizardMorph.MCP/actions/workflows/nuget.yml)
 
 # LizardMorph MCP Server
 
@@ -138,7 +139,7 @@ For both VS Code and Visual Studio, the configuration file uses the following se
 			"args": [
 				"LizardMorph.MCP",
 				"--version",
-				"0.8.0",
+				"0.9.0",
 				"--yes"
 			]
 		}
@@ -159,7 +160,7 @@ To use the LizardMorph MCP server with Claude Desktop, add the following to your
 			"args": [
 				"LizardMorph.MCP",
 				"--version",
-				"0.8.0",
+				"0.9.0",
 				"--yes"
 			]
 		}
